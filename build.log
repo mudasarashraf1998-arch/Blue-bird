@@ -1,0 +1,79 @@
+=== toolchain ===
+platform     : android-35
+build-tools  : 35.0.0
+android.jar  : /usr/local/lib/android/sdk/platforms/android-35/android.jar
+aapt2        : /usr/local/lib/android/sdk/build-tools/35.0.0/aapt2
+d8           : /usr/local/lib/android/sdk/build-tools/35.0.0/d8
+apksigner    : /usr/local/lib/android/sdk/build-tools/35.0.0/apksigner
+Android Asset Packaging Tool (aapt) 2.19-11948202
+javac 17.0.21
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+	for: CN=BlueBird AdFree, OU=Open Build, O=BlueBird, L=Lahore, ST=Punjab, C=PK
+[Storing /home/runner/work/Blue-bird/Blue-bird/android-app/out/bluebird.jks]
+[reference] package=com.bluebird.reference label='BlueBird Reference' java_files=5 output=/home/runner/work/Blue-bird/Blue-bird/android-app/out/reference/gen
+=== [reference] javac ===
+warning: [options] bootstrap class path not set in conjunction with -source 8
+1 warning
+=== [reference] d8 ===
+=== [reference] aapt2 link ===
+=== [reference] apksigner ===
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=BlueBird AdFree, OU=Open Build, O=BlueBird, L=Lahore, ST=Punjab, C=PK
+Signer #1 certificate SHA-256 digest: 7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40
+Signer #1 certificate SHA-1 digest: bb7cffb659ad76e0aa35907b99aafc2a9322c337
+Signer #1 certificate MD5 digest: d32da4391fc3d4bbd19197313010f9ba
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+=== [reference] badging ===
+package: name='com.bluebird.reference' versionCode='1' versionName='1.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+minSdkVersion:'21'
+targetSdkVersion:'35'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
+uses-permission: name='android.permission.RECEIVE_BOOT_COMPLETED'
+application: label='BlueBird Reference' icon=''
+launchable-activity: name='com.bluebird.reference.MainActivity'  label='' icon=''
+feature-group: label=''
+[adfree] package=bluebird.adfree label='BlueBird AdFree' java_files=1 output=/home/runner/work/Blue-bird/Blue-bird/android-app/out/adfree/gen
+=== [adfree] javac ===
+warning: [options] bootstrap class path not set in conjunction with -source 8
+1 warning
+=== [adfree] d8 ===
+=== [adfree] aapt2 link ===
+=== [adfree] apksigner ===
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=BlueBird AdFree, OU=Open Build, O=BlueBird, L=Lahore, ST=Punjab, C=PK
+Signer #1 certificate SHA-256 digest: 7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40
+Signer #1 certificate SHA-1 digest: bb7cffb659ad76e0aa35907b99aafc2a9322c337
+Signer #1 certificate MD5 digest: d32da4391fc3d4bbd19197313010f9ba
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+=== [adfree] badging ===
+package: name='bluebird.adfree' versionCode='1' versionName='1.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+minSdkVersion:'21'
+targetSdkVersion:'35'
+application: label='BlueBird AdFree' icon=''
+launchable-activity: name='bluebird.adfree.MainActivity'  label='' icon=''
+feature-group: label=''
+  uses-feature: name='android.hardware.faketouch'
+  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'
+main
+=== outputs ===
+-rw-r--r-- 1 runner runner 13K Oct 27 14:25 /home/runner/work/Blue-bird/Blue-bird/android-app/out/BlueBird-AdFree.apk
+-rw-r--r-- 1 runner runner 13K Oct 27 14:25 /home/runner/work/Blue-bird/Blue-bird/android-app/out/BlueBird-Reference.apk
+5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b  BlueBird-Reference.apk
+d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97  BlueBird-AdFree.apk
