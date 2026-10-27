@@ -1,0 +1,8 @@
+# Build output and signing material never belong in git.
+out/
+*.jks
+*.keystore
+*.p12
+*.pfx
+*keystore*.b64
+*keystore*base64*.txt

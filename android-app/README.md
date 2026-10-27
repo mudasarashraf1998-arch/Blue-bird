@@ -25,8 +25,13 @@ SDK command-line tools:
 6. `apksigner` signs with a freshly generated throwaway RSA key
    (v1 + v2 schemes) and `apksigner verify` checks the result.
 
-The generated keystore stays in the uncommitted `out/` directory and is never
-pushed. Outputs are copied to `apks/` with SHA-256 checksums.
+The generated development keystore stays in the uncommitted `out/` directory
+and is never pushed. Outputs are copied to `apks/` with SHA-256 checksums.
+
+For a distributable build, see [SIGNING.md](./SIGNING.md): `build.sh` accepts
+`KEYSTORE`, `KEYSTORE_PASSWORD`, `KEY_ALIAS` and `KEY_PASSWORD`, and
+`.github/workflows/release-apk.yml` feeds them from repository secrets. Run
+[`make-keystore.sh`](./make-keystore.sh) once to create and register your key.
 
 ## Local rebuild
 

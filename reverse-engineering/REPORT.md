@@ -93,7 +93,9 @@ record pairs; that is expected behaviour, not a failure.
 - APK is ZIP-aligned (4-byte) and contains `AndroidManifest.xml`,
   `resources.arsc`, `classes.dex`, `META-INF/{MANIFEST.MF,BLUEBIRD.SF,BLUEBIRD.RSA}`.
 - SHA-256 checksums in [`apks/SHA256SUMS`](../apks/SHA256SUMS); full build
-  log in [`build.log`](../build.log).
+  log in [`build.log`](../build.log). The hashes above describe the original
+  development-signed artifacts analysed here — after release signing, use
+  `apks/SHA256SUMS` and `apks/SIGNING-INFO.md` for the current values.
 
 ## Install
 
