@@ -1,5 +1,9 @@
 name: apk-build-probe
 on:
+  push:
+    branches: ["**"]
+    paths:
+      - .github/workflows/apk-probe.yml
   workflow_dispatch:
 permissions:
   contents: write
