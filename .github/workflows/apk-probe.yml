@@ -1,0 +1,30 @@
+name: apk-build-probe
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Report Android SDK availability
+        shell: bash
+        run: |
+          {
+            echo "ANDROID_HOME=$ANDROID_HOME"
+            echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+            echo "JAVA_HOME=$JAVA_HOME"
+            echo "--- platforms ---"; ls "$ANDROID_HOME/platforms" 2>/dev/null | tail -8
+            echo "--- build-tools ---"; ls "$ANDROID_HOME/build-tools" 2>/dev/null | tail -8
+            echo "--- tools ---"; for c in javac java keytool aapt2 d8 zipalign apksigner; do printf '%s: ' "$c"; command -v "$c" || echo missing; done
+          } > probe.txt 2>&1 || true
+          cat probe.txt
+      - name: Publish probe result
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe.txt
+          git commit -m "CI probe: Android SDK availability [skip ci]" || true
+          git push origin "HEAD:arena/87afce57-blue-bird"
