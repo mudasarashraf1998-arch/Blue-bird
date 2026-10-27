@@ -1,0 +1,60 @@
+name: build-adfree-apk
+
+# Triggered by a push to the build script/workflow only. The commit produced by
+# this workflow contains APKs + build.log and therefore does not re-trigger it.
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - .github/workflows/build-apk.yml
+      - android-app/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bluebird-apk-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build signed APKs
+        shell: bash
+        run: |
+          set -o pipefail
+          chmod +x android-app/build.sh android-app/generate.py
+          ./android-app/build.sh > build.log 2>&1 || {
+            echo "::error::APK build failed"
+            tail -160 build.log
+            exit 1
+          }
+          tail -80 build.log
+
+      - name: Publish APKs to the repository
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p apks
+          if [ -d android-app/out ]; then
+            cp -f android-app/out/*.apk apks/ 2>/dev/null || true
+          fi
+          (cd apks && sha256sum *.apk > SHA256SUMS) 2>/dev/null || true
+          {
+            printf '{\n'
+            printf '  "run_id": "%s",\n' "${GITHUB_RUN_ID}"
+            printf '  "commit": "%s",\n' "${GITHUB_SHA}"
+            printf '  "runner": "%s",\n' "${RUNNER_OS}"
+            printf '  "built_at": "%s"\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            printf '}\n'
+          } > apks/build-info.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apks build.log
+          git commit -m "Build BlueBird AdFree + reference APKs [skip ci]" || echo "nothing to commit"
+          git push origin "HEAD:arena/87afce57-blue-bird"
