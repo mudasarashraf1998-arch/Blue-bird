@@ -1,0 +1,210 @@
+{
+  "artifacts": [
+    {
+      "architecture": null,
+      "digest": {
+        "sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97"
+      },
+      "format": "apk"
+    }
+  ],
+  "captures": [],
+  "environments": [],
+  "providers": [
+    {
+      "id": "apk-signature",
+      "name": "REA APK signature reader",
+      "version": null
+    }
+  ],
+  "records": [
+    {
+      "analysis_profile": null,
+      "authority": "shipped-artifact",
+      "confidence": "observed",
+      "environment": null,
+      "evidence_id": "ev_143804ae304acc452888f014ab73ba60792719d092c1953c11760ad68755b34d",
+      "evidence_links": [],
+      "limitations": [
+        "4 bytes outside known signing fields were not interpreted; suffixes do not by themselves establish malformed signing.",
+        "Static structural inspection only. No Android code executes, no device or adb is involved, and odex/vdex/oat/cdex are not read.",
+        "No signature is verified: signer, rotation-lineage and source-stamp signatures are NOT cryptographically checked, and certificate chains, revocation and authenticity are NOT evaluated. Certificates and lineages are what the APK declares.",
+        "matches_apk and self_consistent only show that the declared content digest equals the digest of the current bytes. This is not a signature verification: anyone who changes the bytes can recompute the digest and write it into the signed data. SHA-256 identifies the exact bytes, not the producer.",
+        "v1 signers are what each signature block's PKCS#7 SignedData declares: its signatures, the .SF and MANIFEST.MF digests and entry coverage are NOT verified.",
+        "Not read: v4 .apk.idsig, verity digests (matches_apk null), and the v1 X-Android-APK-Signed marker, so v1_only cannot distinguish a v1-only APK from one whose v2/v3 block was removed."
+      ],
+      "locations": [
+        {
+          "kind": "artifact-path",
+          "path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk"
+        }
+      ],
+      "normalized_result": {
+        "artifact": {
+          "bytes": 12715,
+          "path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk",
+          "sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97"
+        },
+        "posture": {
+          "rotation_present": false,
+          "schemes_agree_on_signer": true,
+          "self_consistent": true,
+          "signer_change_declared_by_rotation": false,
+          "source_stamp_present": false,
+          "strongest_scheme": "v3",
+          "v1_only": false,
+          "v1_signers_match_block_signers": true
+        },
+        "runtime_execution": "not-performed",
+        "schemes": {
+          "v1": {
+            "block_files": ["META-INF/BLUEBIRD.RSA"],
+            "has_manifest": true,
+            "present": true,
+            "signature_files": ["META-INF/BLUEBIRD.SF"],
+            "signers": [
+              {
+                "block_file": "META-INF/BLUEBIRD.RSA",
+                "certificate": {
+                  "issuer": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree",
+                  "not_after": "2054-03-14T14:25:13.000Z",
+                  "not_before": "2026-10-27T14:25:13.000Z",
+                  "public_key_algorithm": "rsa",
+                  "serial_number": "CCC743AD958168EF",
+                  "sha256_fingerprint": "7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40",
+                  "subject": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree"
+                },
+                "certificates": [
+                  {
+                    "sha256_fingerprint": "7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40",
+                    "subject": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree"
+                  }
+                ],
+                "decode_error": null,
+                "signature_file": "META-INF/BLUEBIRD.SF",
+                "signer_infos": [
+                  {
+                    "certificate_sha256": "7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40",
+                    "digest_algorithm_oid": "2.16.840.1.101.3.4.2.1",
+                    "identified_by": "issuer-and-serial",
+                    "signature_algorithm_oid": "1.2.840.113549.1.1.1"
+                  }
+                ]
+              }
+            ]
+          },
+          "v2": {
+            "present": true,
+            "signers": [
+              {
+                "certificate": {
+                  "issuer": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree",
+                  "not_after": "2054-03-14T14:25:13.000Z",
+                  "not_before": "2026-10-27T14:25:13.000Z",
+                  "public_key_algorithm": "rsa",
+                  "serial_number": "CCC743AD958168EF",
+                  "sha256_fingerprint": "7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40",
+                  "subject": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree"
+                },
+                "digests": [
+                  {
+                    "algorithm": "sha256",
+                    "declared_digest_hex": "06ee1e7d4fdea4382c7f1039866f238eca3c4602c8954dbaf6c43a466520e201",
+                    "matches_apk": true,
+                    "signature_algorithm_id": 259,
+                    "uninterpreted_bytes": 0
+                  }
+                ],
+                "max_sdk": null,
+                "min_sdk": null,
+                "public_key_bytes": 294,
+                "signatures": [
+                  {
+                    "algorithm": "sha256",
+                    "signature_algorithm_id": 259,
+                    "signature_bytes": 256,
+                    "uninterpreted_bytes": 0
+                  }
+                ],
+                "uninterpreted_signed_data_bytes": 4,
+                "uninterpreted_signer_bytes": 0
+              }
+            ],
+            "uninterpreted_bytes": 0
+          },
+          "v3": {
+            "present": true,
+            "signers": [
+              {
+                "certificate": {
+                  "issuer": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree",
+                  "not_after": "2054-03-14T14:25:13.000Z",
+                  "not_before": "2026-10-27T14:25:13.000Z",
+                  "public_key_algorithm": "rsa",
+                  "serial_number": "CCC743AD958168EF",
+                  "sha256_fingerprint": "7b6ee6117aec2db3532587fb7370aab7afbdfccd9ea4e4b3079fb929b8ec3f40",
+                  "subject": "C=PK\nST=Punjab\nL=Lahore\nO=BlueBird\nOU=Open Build\nCN=BlueBird AdFree"
+                },
+                "digests": [
+                  {
+                    "algorithm": "sha256",
+                    "declared_digest_hex": "06ee1e7d4fdea4382c7f1039866f238eca3c4602c8954dbaf6c43a466520e201",
+                    "matches_apk": true,
+                    "signature_algorithm_id": 259,
+                    "uninterpreted_bytes": 0
+                  }
+                ],
+                "max_sdk": 2147483647,
+                "min_sdk": 24,
+                "public_key_bytes": 294,
+                "rotation": {
+                  "decode_error": null,
+                  "lineage": [],
+                  "present": false
+                },
+                "signatures": [
+                  {
+                    "algorithm": "sha256",
+                    "signature_algorithm_id": 259,
+                    "signature_bytes": 256,
+                    "uninterpreted_bytes": 0
+                  }
+                ],
+                "uninterpreted_signed_data_bytes": 0,
+                "uninterpreted_signer_bytes": 0
+              }
+            ],
+            "uninterpreted_bytes": 0
+          },
+          "v3.1": { "present": false, "signers": [], "uninterpreted_bytes": 0 }
+        },
+        "source_stamp": {
+          "certificate": null,
+          "decode_error": null,
+          "present": false
+        }
+      },
+      "operation": "inspect_apk_signature",
+      "parameters": { "path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk" },
+      "predicate_type": "rea.analysis",
+      "provider": {
+        "id": "apk-signature",
+        "name": "REA APK signature reader",
+        "version": null
+      },
+      "raw_result": null,
+      "relationship_coverage": null,
+      "subject": {
+        "architecture": null,
+        "digest": {
+          "sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97"
+        },
+        "format": "apk",
+        "local_path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk",
+        "name": "BlueBird-AdFree.apk"
+      }
+    }
+  ],
+  "scenarios": [],
+  "unknowns": []
+}
