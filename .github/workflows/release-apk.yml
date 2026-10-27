@@ -116,6 +116,16 @@ jobs:
           git commit -m "Release: sign BlueBird AdFree with repository key [skip ci]" || echo "nothing to commit"
           git push origin "HEAD:arena/87afce57-blue-bird"
 
+      - name: Keep verification logs
+        if: steps.mode.outputs.mode == 'smoke'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-signing-smoke-logs
+          path: |
+            apks/release-build.log
+            apks/release-verify.log
+          retention-days: 7
+
       - name: Smoke-mode result
         if: steps.mode.outputs.mode == 'smoke'
         run: |
