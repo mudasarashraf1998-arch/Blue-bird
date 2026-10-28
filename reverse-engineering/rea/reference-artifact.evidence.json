@@ -1,0 +1,693 @@
+{
+  "artifacts": [
+    {
+      "architecture": null,
+      "digest": {
+        "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+      },
+      "format": "apk"
+    }
+  ],
+  "captures": [],
+  "environments": [],
+  "providers": [
+    {
+      "id": "rea-artifact-graph",
+      "name": "REA safe artifact graph provider",
+      "version": "1"
+    }
+  ],
+  "records": [
+    {
+      "analysis_profile": null,
+      "authority": "shipped-artifact",
+      "caller_input_path": "/home/user/Blue-bird/apks/BlueBird-Reference.apk",
+      "confidence": "observed",
+      "environment": null,
+      "evidence_id": "ev_533617fd3f15e8ee6defc62f65f7fc96a89fbfed6e16a719def670136ce5557b",
+      "evidence_links": [
+        "ev_956f723002c0ca3427860051505a32b7a9cb49585bbfca1656f46b7a6f4e87c0"
+      ],
+      "limitations": [
+        "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+        "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+      ],
+      "locations": [],
+      "normalized_result": {
+        "contradictions": [],
+        "coverage": {
+          "hypotheses_omitted": 0,
+          "hypotheses_retained": 0,
+          "next_probes_omitted": 0,
+          "next_probes_retained": 0,
+          "observations_omitted": 0,
+          "observations_retained": 1,
+          "status": "complete-within-substeps",
+          "substeps_completed": 1,
+          "unexplored_branches_omitted": 0,
+          "unexplored_branches_retained": 0
+        },
+        "evidence_links": [
+          "ev_956f723002c0ca3427860051505a32b7a9cb49585bbfca1656f46b7a6f4e87c0"
+        ],
+        "hypotheses": [],
+        "inspection_id": "ai_795cfb901ceb93bba5ecf0e0004fc25a30dce8ff5768c978ba2b5ffb41b59a84",
+        "limitations": [
+          "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+          "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+        ],
+        "next_probes": [],
+        "observations": [
+          {
+            "evidence_id": "ev_956f723002c0ca3427860051505a32b7a9cb49585bbfca1656f46b7a6f4e87c0",
+            "kind": "root-manifest",
+            "observation_id": "aio_02597cb7d0b33836c59e9ec441fba6d08a3c95b3cb9279966a4e113bb002f150",
+            "subject": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "value": {
+              "edge_count": 6,
+              "graph_sha256": "0e3a1cc072f9a1a9d2b0cc50aa1027a7ff49bf6f5e75db53e367fdc44f434601",
+              "manifest_id": "agm_2428f54d4f14aa254f77f720750734d56ced8cde62359250481986918575ca0b",
+              "node_count": 7,
+              "occurrence_count": 7,
+              "root_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+              "root_format": "apk",
+              "root_sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+            }
+          }
+        ],
+        "subject": {
+          "manifest_id": "agm_2428f54d4f14aa254f77f720750734d56ced8cde62359250481986918575ca0b",
+          "root_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+          "root_format": "apk",
+          "root_sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+        },
+        "substeps": [
+          {
+            "evidence": {
+              "analysis_profile": null,
+              "authority": "shipped-artifact",
+              "confidence": "observed",
+              "environment": null,
+              "evidence_id": "ev_956f723002c0ca3427860051505a32b7a9cb49585bbfca1656f46b7a6f4e87c0",
+              "evidence_links": [],
+              "limitations": [
+                "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+              ],
+              "locations": [],
+              "normalized_result": {
+                "coverage": {
+                  "scope": "container-entries",
+                  "status": "complete"
+                },
+                "edges": [
+                  {
+                    "edge_id": "edge_206033aaf72a198fad7fe6dc61231205d6d2caa20e5d00507442e15cdfd5751e",
+                    "occurrence_id": "occ_e9ee5996aac9a1fd36958c25fb34719682a0019b1c93469f397b3a654b9f4660",
+                    "ordinal": 0,
+                    "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "producer": null,
+                    "relation": "contains"
+                  },
+                  {
+                    "edge_id": "edge_26574a6a316c3cdc1aa63de318f3ad8585465c0870cc970ff5997c259e141d35",
+                    "occurrence_id": "occ_57cf8a041a111212f1864bf1e2fbb6a93146a001a8b2eb8d7688eeace943c657",
+                    "ordinal": 1,
+                    "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "producer": null,
+                    "relation": "contains"
+                  },
+                  {
+                    "edge_id": "edge_28b16487259bcae1e3d8239ce50ba19cdb2411bbca8c304780bd9253ddb192bd",
+                    "occurrence_id": "occ_e188bc2e4cd81af3564772f32daa21dcff3a727475e3fa2f0dabba73e4f30be0",
+                    "ordinal": 2,
+                    "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "producer": null,
+                    "relation": "contains"
+                  },
+                  {
+                    "edge_id": "edge_6e39343c0fcef5b1df86bcf416dec3b5e254d424e8b969ad39e03a5dcc2fd33f",
+                    "occurrence_id": "occ_f6d17f3b5c089b0fcc6e178617b4c0e35939d791471a2ec255f52d5882a3cb54",
+                    "ordinal": 3,
+                    "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "producer": null,
+                    "relation": "contains"
+                  },
+                  {
+                    "edge_id": "edge_bd2b20b7ae7ea988691b9d188d35a6509b4cc8185c824ce9ca678e0dea5392e1",
+                    "occurrence_id": "occ_a89e51d80eb15c7db48764e04d59e6fd315b05801bb1c2748e1a2ac4f0995066",
+                    "ordinal": 4,
+                    "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "producer": null,
+                    "relation": "contains"
+                  },
+                  {
+                    "edge_id": "edge_e818fda63efbb91a490509e5122935c79373cb3ca71aaa29b3a2f1cba4f081d3",
+                    "occurrence_id": "occ_3f6c7b2b77e12bab5d72c02b709f5b1f9f689ee97369554ca57c46bb8c338244",
+                    "ordinal": 5,
+                    "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "producer": null,
+                    "relation": "contains"
+                  }
+                ],
+                "integrity_contradictions": [],
+                "limitations": [
+                  "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+                ],
+                "manifest": {
+                  "edge_count": 6,
+                  "graph_sha256": "0e3a1cc072f9a1a9d2b0cc50aa1027a7ff49bf6f5e75db53e367fdc44f434601",
+                  "manifest_id": "agm_2428f54d4f14aa254f77f720750734d56ced8cde62359250481986918575ca0b",
+                  "node_count": 7,
+                  "occurrence_count": 7,
+                  "root_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                  "root_format": "apk",
+                  "root_sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+                },
+                "nodes": [
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_0896022c965bcba6c9013034c473df34d9771fe1c9927903a6e421e419f86394",
+                    "content_state": "embedded",
+                    "format": "file",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "b03fcde289ab8c6754a1cdecd4279540ac146c68ce8389c2fd068c441ef1ffa0",
+                    "size": 412
+                  },
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_2f18ab0992874813ba18a0f1b06c74fb3aef94c8207925618d807453d7cbbbd1",
+                    "content_state": "embedded",
+                    "format": "file",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "8df3ef20677bd1096ec6c72f61a10bef195ddf10c108a5d1e986badd9329cbd9",
+                    "size": 285
+                  },
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_338a2cbf496f3516d391aef70923530a52dacb3023502795dbcb538776aa081f",
+                    "content_state": "embedded",
+                    "format": "file",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "ade552fcc98e6a45799f1a24a95e53c4a4667d9746d06b5de51d57986f59c532",
+                    "size": 4524
+                  },
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_4199162d6e9b4df245f4917cb5c4cf5c76bc1db2ff78ea8c7a2afd54f412a59f",
+                    "content_state": "embedded",
+                    "format": "file",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "287b26b42e3a6c5fbc1468bc3a03dcf71b9cf2bef9c068a6c8a01a80ebe09a45",
+                    "size": 3616
+                  },
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "content_state": "materialized",
+                    "format": "zip",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b",
+                    "size": 12715
+                  },
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_cbf8959d9d4009c8456f36a033f393a2d7bd3b50122ca5f86f165a47465ec713",
+                    "content_state": "embedded",
+                    "format": "file",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "628abd3767421f0309ad23b71eb6866c701498700845bd4dac058b4bd4f22ed4",
+                    "size": 1397
+                  },
+                  {
+                    "architecture": null,
+                    "artifact_id": "art_df2c92c2768817b6ed04db8c9734ce6733aa2637a21a51520e57cc5f7d9b2208",
+                    "content_state": "embedded",
+                    "format": "file",
+                    "limitations": [],
+                    "media_type": null,
+                    "sha256": "1fa3cb291285348ec1b33c85e7317d989467707f4791c4e5302f2d312d1e18c8",
+                    "size": 40
+                  }
+                ],
+                "occurrences": [
+                  {
+                    "artifact_format": "apk",
+                    "artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+                    "artifact_kind": "container",
+                    "compressed_size": null,
+                    "declared_size": 12715,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": ".",
+                    "occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "parent_occurrence_id": null,
+                    "source_location": null
+                  },
+                  {
+                    "artifact_format": "file",
+                    "artifact_id": "art_4199162d6e9b4df245f4917cb5c4cf5c76bc1db2ff78ea8c7a2afd54f412a59f",
+                    "artifact_kind": "resource",
+                    "compressed_size": 1170,
+                    "declared_size": 3616,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": "AndroidManifest.xml",
+                    "occurrence_id": "occ_3f6c7b2b77e12bab5d72c02b709f5b1f9f689ee97369554ca57c46bb8c338244",
+                    "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "source_location": null
+                  },
+                  {
+                    "artifact_format": "file",
+                    "artifact_id": "art_cbf8959d9d4009c8456f36a033f393a2d7bd3b50122ca5f86f165a47465ec713",
+                    "artifact_kind": "resource",
+                    "compressed_size": 1117,
+                    "declared_size": 1397,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": "META-INF/BLUEBIRD.RSA",
+                    "occurrence_id": "occ_f6d17f3b5c089b0fcc6e178617b4c0e35939d791471a2ec255f52d5882a3cb54",
+                    "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "source_location": null
+                  },
+                  {
+                    "artifact_format": "file",
+                    "artifact_id": "art_0896022c965bcba6c9013034c473df34d9771fe1c9927903a6e421e419f86394",
+                    "artifact_kind": "resource",
+                    "compressed_size": 299,
+                    "declared_size": 412,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": "META-INF/BLUEBIRD.SF",
+                    "occurrence_id": "occ_57cf8a041a111212f1864bf1e2fbb6a93146a001a8b2eb8d7688eeace943c657",
+                    "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "source_location": null
+                  },
+                  {
+                    "artifact_format": "file",
+                    "artifact_id": "art_2f18ab0992874813ba18a0f1b06c74fb3aef94c8207925618d807453d7cbbbd1",
+                    "artifact_kind": "resource",
+                    "compressed_size": 214,
+                    "declared_size": 285,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": "META-INF/MANIFEST.MF",
+                    "occurrence_id": "occ_e188bc2e4cd81af3564772f32daa21dcff3a727475e3fa2f0dabba73e4f30be0",
+                    "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "source_location": null
+                  },
+                  {
+                    "artifact_format": "file",
+                    "artifact_id": "art_338a2cbf496f3516d391aef70923530a52dacb3023502795dbcb538776aa081f",
+                    "artifact_kind": "resource",
+                    "compressed_size": 2388,
+                    "declared_size": 4524,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": "classes.dex",
+                    "occurrence_id": "occ_a89e51d80eb15c7db48764e04d59e6fd315b05801bb1c2748e1a2ac4f0995066",
+                    "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "source_location": null
+                  },
+                  {
+                    "artifact_format": "file",
+                    "artifact_id": "art_df2c92c2768817b6ed04db8c9734ce6733aa2637a21a51520e57cc5f7d9b2208",
+                    "artifact_kind": "resource",
+                    "compressed_size": 40,
+                    "declared_size": 40,
+                    "encrypted": false,
+                    "entry_kind": "file",
+                    "executable": false,
+                    "hash_status": "verified",
+                    "limitations": [],
+                    "logical_path": "resources.arsc",
+                    "occurrence_id": "occ_e9ee5996aac9a1fd36958c25fb34719682a0019b1c93469f397b3a654b9f4660",
+                    "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+                    "source_location": null
+                  }
+                ],
+                "provenance": []
+              },
+              "operation": "inventory_artifact",
+              "parameters": { "integrity_policy": "fail" },
+              "predicate_type": "rea.analysis",
+              "provider": {
+                "id": "rea-artifact-graph",
+                "name": "REA safe artifact graph provider",
+                "version": "1"
+              },
+              "raw_result": null,
+              "relationship_coverage": null,
+              "subject": {
+                "architecture": null,
+                "digest": {
+                  "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+                },
+                "format": "apk",
+                "local_path": "/home/user/Blue-bird/apks/BlueBird-Reference.apk",
+                "name": "BlueBird-Reference.apk"
+              }
+            },
+            "evidence_id": "ev_956f723002c0ca3427860051505a32b7a9cb49585bbfca1656f46b7a6f4e87c0",
+            "operation": "inventory_artifact",
+            "status": "completed",
+            "substep_id": "ais_c850c23f7cbd10444e5c738492a841f286eb8afce7d88c890c4f756203316896"
+          }
+        ],
+        "unexplored_branches": []
+      },
+      "operation": "inspect_artifact",
+      "parameters": {
+        "input_path": "/home/user/Blue-bird/apks/BlueBird-Reference.apk",
+        "integrity_policy": "fail"
+      },
+      "predicate_type": "rea.analysis",
+      "provider": {
+        "id": "rea-artifact-graph",
+        "name": "REA safe artifact graph provider",
+        "version": "1"
+      },
+      "raw_result": null,
+      "relationship_coverage": null,
+      "subject": {
+        "architecture": null,
+        "digest": {
+          "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+        },
+        "format": "apk",
+        "local_path": "/home/user/Blue-bird/apks/BlueBird-Reference.apk",
+        "name": "BlueBird-Reference.apk"
+      }
+    },
+    {
+      "analysis_profile": null,
+      "authority": "shipped-artifact",
+      "confidence": "observed",
+      "environment": null,
+      "evidence_id": "ev_956f723002c0ca3427860051505a32b7a9cb49585bbfca1656f46b7a6f4e87c0",
+      "evidence_links": [],
+      "limitations": [
+        "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+      ],
+      "locations": [],
+      "normalized_result": {
+        "coverage": { "scope": "container-entries", "status": "complete" },
+        "edges": [
+          {
+            "edge_id": "edge_206033aaf72a198fad7fe6dc61231205d6d2caa20e5d00507442e15cdfd5751e",
+            "occurrence_id": "occ_e9ee5996aac9a1fd36958c25fb34719682a0019b1c93469f397b3a654b9f4660",
+            "ordinal": 0,
+            "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "producer": null,
+            "relation": "contains"
+          },
+          {
+            "edge_id": "edge_26574a6a316c3cdc1aa63de318f3ad8585465c0870cc970ff5997c259e141d35",
+            "occurrence_id": "occ_57cf8a041a111212f1864bf1e2fbb6a93146a001a8b2eb8d7688eeace943c657",
+            "ordinal": 1,
+            "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "producer": null,
+            "relation": "contains"
+          },
+          {
+            "edge_id": "edge_28b16487259bcae1e3d8239ce50ba19cdb2411bbca8c304780bd9253ddb192bd",
+            "occurrence_id": "occ_e188bc2e4cd81af3564772f32daa21dcff3a727475e3fa2f0dabba73e4f30be0",
+            "ordinal": 2,
+            "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "producer": null,
+            "relation": "contains"
+          },
+          {
+            "edge_id": "edge_6e39343c0fcef5b1df86bcf416dec3b5e254d424e8b969ad39e03a5dcc2fd33f",
+            "occurrence_id": "occ_f6d17f3b5c089b0fcc6e178617b4c0e35939d791471a2ec255f52d5882a3cb54",
+            "ordinal": 3,
+            "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "producer": null,
+            "relation": "contains"
+          },
+          {
+            "edge_id": "edge_bd2b20b7ae7ea988691b9d188d35a6509b4cc8185c824ce9ca678e0dea5392e1",
+            "occurrence_id": "occ_a89e51d80eb15c7db48764e04d59e6fd315b05801bb1c2748e1a2ac4f0995066",
+            "ordinal": 4,
+            "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "producer": null,
+            "relation": "contains"
+          },
+          {
+            "edge_id": "edge_e818fda63efbb91a490509e5122935c79373cb3ca71aaa29b3a2f1cba4f081d3",
+            "occurrence_id": "occ_3f6c7b2b77e12bab5d72c02b709f5b1f9f689ee97369554ca57c46bb8c338244",
+            "ordinal": 5,
+            "parent_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "producer": null,
+            "relation": "contains"
+          }
+        ],
+        "integrity_contradictions": [],
+        "limitations": [
+          "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+        ],
+        "manifest": {
+          "edge_count": 6,
+          "graph_sha256": "0e3a1cc072f9a1a9d2b0cc50aa1027a7ff49bf6f5e75db53e367fdc44f434601",
+          "manifest_id": "agm_2428f54d4f14aa254f77f720750734d56ced8cde62359250481986918575ca0b",
+          "node_count": 7,
+          "occurrence_count": 7,
+          "root_artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+          "root_format": "apk",
+          "root_sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+        },
+        "nodes": [
+          {
+            "architecture": null,
+            "artifact_id": "art_0896022c965bcba6c9013034c473df34d9771fe1c9927903a6e421e419f86394",
+            "content_state": "embedded",
+            "format": "file",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "b03fcde289ab8c6754a1cdecd4279540ac146c68ce8389c2fd068c441ef1ffa0",
+            "size": 412
+          },
+          {
+            "architecture": null,
+            "artifact_id": "art_2f18ab0992874813ba18a0f1b06c74fb3aef94c8207925618d807453d7cbbbd1",
+            "content_state": "embedded",
+            "format": "file",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "8df3ef20677bd1096ec6c72f61a10bef195ddf10c108a5d1e986badd9329cbd9",
+            "size": 285
+          },
+          {
+            "architecture": null,
+            "artifact_id": "art_338a2cbf496f3516d391aef70923530a52dacb3023502795dbcb538776aa081f",
+            "content_state": "embedded",
+            "format": "file",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "ade552fcc98e6a45799f1a24a95e53c4a4667d9746d06b5de51d57986f59c532",
+            "size": 4524
+          },
+          {
+            "architecture": null,
+            "artifact_id": "art_4199162d6e9b4df245f4917cb5c4cf5c76bc1db2ff78ea8c7a2afd54f412a59f",
+            "content_state": "embedded",
+            "format": "file",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "287b26b42e3a6c5fbc1468bc3a03dcf71b9cf2bef9c068a6c8a01a80ebe09a45",
+            "size": 3616
+          },
+          {
+            "architecture": null,
+            "artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "content_state": "materialized",
+            "format": "zip",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b",
+            "size": 12715
+          },
+          {
+            "architecture": null,
+            "artifact_id": "art_cbf8959d9d4009c8456f36a033f393a2d7bd3b50122ca5f86f165a47465ec713",
+            "content_state": "embedded",
+            "format": "file",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "628abd3767421f0309ad23b71eb6866c701498700845bd4dac058b4bd4f22ed4",
+            "size": 1397
+          },
+          {
+            "architecture": null,
+            "artifact_id": "art_df2c92c2768817b6ed04db8c9734ce6733aa2637a21a51520e57cc5f7d9b2208",
+            "content_state": "embedded",
+            "format": "file",
+            "limitations": [],
+            "media_type": null,
+            "sha256": "1fa3cb291285348ec1b33c85e7317d989467707f4791c4e5302f2d312d1e18c8",
+            "size": 40
+          }
+        ],
+        "occurrences": [
+          {
+            "artifact_format": "apk",
+            "artifact_id": "art_9f31918402efcab7c4e86e02b654171470fb9e492f1372196c7c9842d8336431",
+            "artifact_kind": "container",
+            "compressed_size": null,
+            "declared_size": 12715,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": ".",
+            "occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "parent_occurrence_id": null,
+            "source_location": null
+          },
+          {
+            "artifact_format": "file",
+            "artifact_id": "art_4199162d6e9b4df245f4917cb5c4cf5c76bc1db2ff78ea8c7a2afd54f412a59f",
+            "artifact_kind": "resource",
+            "compressed_size": 1170,
+            "declared_size": 3616,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": "AndroidManifest.xml",
+            "occurrence_id": "occ_3f6c7b2b77e12bab5d72c02b709f5b1f9f689ee97369554ca57c46bb8c338244",
+            "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "source_location": null
+          },
+          {
+            "artifact_format": "file",
+            "artifact_id": "art_cbf8959d9d4009c8456f36a033f393a2d7bd3b50122ca5f86f165a47465ec713",
+            "artifact_kind": "resource",
+            "compressed_size": 1117,
+            "declared_size": 1397,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": "META-INF/BLUEBIRD.RSA",
+            "occurrence_id": "occ_f6d17f3b5c089b0fcc6e178617b4c0e35939d791471a2ec255f52d5882a3cb54",
+            "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "source_location": null
+          },
+          {
+            "artifact_format": "file",
+            "artifact_id": "art_0896022c965bcba6c9013034c473df34d9771fe1c9927903a6e421e419f86394",
+            "artifact_kind": "resource",
+            "compressed_size": 299,
+            "declared_size": 412,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": "META-INF/BLUEBIRD.SF",
+            "occurrence_id": "occ_57cf8a041a111212f1864bf1e2fbb6a93146a001a8b2eb8d7688eeace943c657",
+            "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "source_location": null
+          },
+          {
+            "artifact_format": "file",
+            "artifact_id": "art_2f18ab0992874813ba18a0f1b06c74fb3aef94c8207925618d807453d7cbbbd1",
+            "artifact_kind": "resource",
+            "compressed_size": 214,
+            "declared_size": 285,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": "META-INF/MANIFEST.MF",
+            "occurrence_id": "occ_e188bc2e4cd81af3564772f32daa21dcff3a727475e3fa2f0dabba73e4f30be0",
+            "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "source_location": null
+          },
+          {
+            "artifact_format": "file",
+            "artifact_id": "art_338a2cbf496f3516d391aef70923530a52dacb3023502795dbcb538776aa081f",
+            "artifact_kind": "resource",
+            "compressed_size": 2388,
+            "declared_size": 4524,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": "classes.dex",
+            "occurrence_id": "occ_a89e51d80eb15c7db48764e04d59e6fd315b05801bb1c2748e1a2ac4f0995066",
+            "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "source_location": null
+          },
+          {
+            "artifact_format": "file",
+            "artifact_id": "art_df2c92c2768817b6ed04db8c9734ce6733aa2637a21a51520e57cc5f7d9b2208",
+            "artifact_kind": "resource",
+            "compressed_size": 40,
+            "declared_size": 40,
+            "encrypted": false,
+            "entry_kind": "file",
+            "executable": false,
+            "hash_status": "verified",
+            "limitations": [],
+            "logical_path": "resources.arsc",
+            "occurrence_id": "occ_e9ee5996aac9a1fd36958c25fb34719682a0019b1c93469f397b3a654b9f4660",
+            "parent_occurrence_id": "occ_085892d2ad7281022a50203bd622d86683daac2059e58b2670ad49722af7763c",
+            "source_location": null
+          }
+        ],
+        "provenance": []
+      },
+      "operation": "inventory_artifact",
+      "parameters": { "integrity_policy": "fail" },
+      "predicate_type": "rea.analysis",
+      "provider": {
+        "id": "rea-artifact-graph",
+        "name": "REA safe artifact graph provider",
+        "version": "1"
+      },
+      "raw_result": null,
+      "relationship_coverage": null,
+      "subject": {
+        "architecture": null,
+        "digest": {
+          "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b"
+        },
+        "format": "apk",
+        "local_path": "/home/user/Blue-bird/apks/BlueBird-Reference.apk",
+        "name": "BlueBird-Reference.apk"
+      }
+    }
+  ],
+  "scenarios": [],
+  "unknowns": []
+}

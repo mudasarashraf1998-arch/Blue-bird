@@ -1,0 +1,167 @@
+{
+  "tool": "androguard static analysis",
+  "method": "binary AXML manifest decode + DEX string/class enumeration + ZIP inventory",
+  "reference": {
+    "file": "BlueBird-Reference.apk",
+    "bytes": 12715,
+    "sha256": "5423bf6a0ff44648243feb0b0f2c79a0fd2448c27dba60a91c7c8f864292d65b",
+    "package": "com.bluebird.reference",
+    "app_label": "BlueBird Reference",
+    "version_name": "1.0",
+    "version_code": "1",
+    "min_sdk": "21",
+    "target_sdk": "35",
+    "permissions": [
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.INTERNET",
+      "android.permission.RECEIVE_BOOT_COMPLETED"
+    ],
+    "activities": [
+      "com.bluebird.reference.AdActivity",
+      "com.bluebird.reference.MainActivity"
+    ],
+    "services": ["com.bluebird.reference.AdService"],
+    "receivers": ["com.bluebird.reference.AdReceiver"],
+    "providers": [],
+    "meta_data": [
+      {
+        "name": "com.google.android.gms.ads.APPLICATION_ID",
+        "value": "ca-app-pub-3940256099942544~3347511713"
+      },
+      {
+        "name": "com.google.android.gms.ads.AD_MANAGER_APP",
+        "value": "true"
+      }
+    ],
+    "manifest_xml": "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" android:versionCode=\"1\" android:versionName=\"1.0\" android:compileSdkVersion=\"35\" android:compileSdkVersionCodename=\"15\" package=\"com.bluebird.reference\" platformBuildVersionCode=\"35\" platformBuildVersionName=\"15\">\n  <uses-sdk android:minSdkVersion=\"21\" android:targetSdkVersion=\"35\"/>\n  <uses-permission android:name=\"android.permission.INTERNET\"/>\n  <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>\n  <uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>\n  <application android:theme=\"@android:01030241\" android:label=\"BlueBird Reference\" android:allowBackup=\"false\">\n    <activity android:name=\".MainActivity\" android:exported=\"true\">\n      <intent-filter>\n        <action android:name=\"android.intent.action.MAIN\"/>\n        <category android:name=\"android.intent.category.LAUNCHER\"/>\n      </intent-filter>\n    </activity>\n    <meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"ca-app-pub-3940256099942544~3347511713\"/>\n    <meta-data android:name=\"com.google.android.gms.ads.AD_MANAGER_APP\" android:value=\"true\"/>\n    <activity android:name=\".AdActivity\" android:exported=\"false\"/>\n    <service android:name=\".AdService\" android:exported=\"false\"/>\n    <receiver android:name=\".AdReceiver\" android:exported=\"false\">\n      <intent-filter>\n        <action android:name=\"android.intent.action.BOOT_COMPLETED\"/>\n      </intent-filter>\n    </receiver>\n  </application>\n</manifest>\n",
+    "zip_entries": [
+      "AndroidManifest.xml",
+      "META-INF/BLUEBIRD.RSA",
+      "META-INF/BLUEBIRD.SF",
+      "META-INF/MANIFEST.MF",
+      "classes.dex",
+      "resources.arsc"
+    ],
+    "dex_sizes": [4524],
+    "class_count": 6,
+    "classes": [
+      "Lcom/bluebird/reference/AdActivity;",
+      "Lcom/bluebird/reference/AdHelper;",
+      "Lcom/bluebird/reference/AdReceiver;",
+      "Lcom/bluebird/reference/AdService;",
+      "Lcom/bluebird/reference/MainActivity$1;",
+      "Lcom/bluebird/reference/MainActivity;"
+    ],
+    "string_count": 88,
+    "ad_strings": [
+      "INTERSTITIAL_HOST",
+      "Sponsored - example-ad-network.example/promo",
+      "TRACKING_HOST",
+      "ca-app-pub-3940256099942544/6300978111",
+      "ca-app-pub-3940256099942544~3347511713",
+      "https://googleads.g.doubleclick.net/mads/gma",
+      "https://googleads.g.doubleclick.net/mads/static/mad/sdkunit/core/view.html",
+      "https://pagead2.googlesyndication.com/pagead/gen_204",
+      "loadBanner",
+      "showInterstitial"
+    ],
+    "ad_classes": [
+      "Lcom/bluebird/reference/AdActivity;",
+      "Lcom/bluebird/reference/AdHelper;",
+      "Lcom/bluebird/reference/AdReceiver;",
+      "Lcom/bluebird/reference/AdService;"
+    ],
+    "ad_permissions": [
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.INTERNET",
+      "android.permission.RECEIVE_BOOT_COMPLETED"
+    ],
+    "network_endpoints": [
+      "https://googleads.g.doubleclick.net/mads/gma",
+      "https://googleads.g.doubleclick.net/mads/static/mad/sdkunit/core/view.html",
+      "https://pagead2.googlesyndication.com/pagead/gen_204"
+    ]
+  },
+  "ad_free": {
+    "file": "BlueBird-AdFree.apk",
+    "bytes": 12715,
+    "sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97",
+    "package": "bluebird.adfree",
+    "app_label": "BlueBird AdFree",
+    "version_name": "1.0",
+    "version_code": "1",
+    "min_sdk": "21",
+    "target_sdk": "35",
+    "permissions": [],
+    "activities": ["bluebird.adfree.MainActivity"],
+    "services": [],
+    "receivers": [],
+    "providers": [],
+    "meta_data": [],
+    "manifest_xml": "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" android:versionCode=\"1\" android:versionName=\"1.0\" android:compileSdkVersion=\"35\" android:compileSdkVersionCodename=\"15\" package=\"bluebird.adfree\" platformBuildVersionCode=\"35\" platformBuildVersionName=\"15\">\n  <uses-sdk android:minSdkVersion=\"21\" android:targetSdkVersion=\"35\"/>\n  <application android:theme=\"@android:01030241\" android:label=\"BlueBird AdFree\" android:allowBackup=\"false\">\n    <activity android:name=\".MainActivity\" android:exported=\"true\">\n      <intent-filter>\n        <action android:name=\"android.intent.action.MAIN\"/>\n        <category android:name=\"android.intent.category.LAUNCHER\"/>\n      </intent-filter>\n    </activity>\n  </application>\n</manifest>\n",
+    "zip_entries": [
+      "AndroidManifest.xml",
+      "META-INF/BLUEBIRD.RSA",
+      "META-INF/BLUEBIRD.SF",
+      "META-INF/MANIFEST.MF",
+      "classes.dex",
+      "resources.arsc"
+    ],
+    "dex_sizes": [2948],
+    "class_count": 2,
+    "classes": [
+      "Lbluebird/adfree/MainActivity$1;",
+      "Lbluebird/adfree/MainActivity;"
+    ],
+    "string_count": 60,
+    "ad_strings": [],
+    "ad_classes": [],
+    "ad_permissions": [],
+    "network_endpoints": []
+  },
+  "diff": {
+    "package_changed": ["com.bluebird.reference", "bluebird.adfree"],
+    "label_changed": ["BlueBird Reference", "BlueBird AdFree"],
+    "permissions_removed": [
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.INTERNET",
+      "android.permission.RECEIVE_BOOT_COMPLETED"
+    ],
+    "permissions_added": [],
+    "activities_removed": ["AdActivity"],
+    "services_removed": ["AdService"],
+    "receivers_removed": ["AdReceiver"],
+    "meta_data_removed": [
+      {
+        "name": "com.google.android.gms.ads.APPLICATION_ID",
+        "value": "ca-app-pub-3940256099942544~3347511713"
+      },
+      {
+        "name": "com.google.android.gms.ads.AD_MANAGER_APP",
+        "value": "true"
+      }
+    ],
+    "ad_classes_removed": ["AdActivity", "AdHelper", "AdReceiver", "AdService"],
+    "ad_strings_removed": [
+      "INTERSTITIAL_HOST",
+      "Sponsored - example-ad-network.example/promo",
+      "TRACKING_HOST",
+      "ca-app-pub-3940256099942544/6300978111",
+      "ca-app-pub-3940256099942544~3347511713",
+      "https://googleads.g.doubleclick.net/mads/gma",
+      "https://googleads.g.doubleclick.net/mads/static/mad/sdkunit/core/view.html",
+      "https://pagead2.googlesyndication.com/pagead/gen_204",
+      "loadBanner",
+      "showInterstitial"
+    ],
+    "network_endpoints_removed": [
+      "https://googleads.g.doubleclick.net/mads/gma",
+      "https://googleads.g.doubleclick.net/mads/static/mad/sdkunit/core/view.html",
+      "https://pagead2.googlesyndication.com/pagead/gen_204"
+    ],
+    "core_activity_preserved": true,
+    "class_count": [6, 2],
+    "string_count": [88, 60],
+    "bytes": [12715, 12715]
+  }
+}

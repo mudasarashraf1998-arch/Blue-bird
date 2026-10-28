@@ -1,0 +1,123 @@
+{
+  "summary": {
+    "evidence_id": "ev_6b0cea3ae95250720a25008582c3006029fdfa262b168082cbd59ef790d9dc39",
+    "subject": {
+      "name": "BlueBird-AdFree.apk",
+      "digest": {
+        "sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97"
+      },
+      "local_path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk",
+      "format": "apk",
+      "architecture": null
+    },
+    "provider": {
+      "id": "rea-analysis-view",
+      "name": "REA analysis view projection",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis-view",
+    "operation": "inspect_analysis_view",
+    "parameters": {
+      "parent_evidence_id": "ev_a7799072fbd1e53ac1667588450b583f9078f09866ae67d3b8e01ab9ad9e4175",
+      "view": { "kind": "summary" }
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "kind": "summary",
+      "view": { "kind": "summary" },
+      "parent_evidence_id": "ev_a7799072fbd1e53ac1667588450b583f9078f09866ae67d3b8e01ab9ad9e4175",
+      "parent_operation": "inspect_artifact",
+      "parent_digest": "a7799072fbd1e53ac1667588450b583f9078f09866ae67d3b8e01ab9ad9e4175",
+      "view_digest": "a6eebc1aefb07f5e3360e6be37c63a663065e19c9cf255e75856326760e68347",
+      "artifact": {
+        "path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk",
+        "sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97"
+      },
+      "coverage": {
+        "status": "complete-within-view",
+        "examined": 20,
+        "total": 20,
+        "next_offset": null,
+        "exhausted": true
+      },
+      "limitations": [
+        "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+        "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+      ],
+      "unknowns": [
+        "Inventory does not establish application runtime behavior or complete format-specific analysis."
+      ],
+      "summary": {
+        "source_coverage": {
+          "scope": "container-entries",
+          "status": "complete"
+        },
+        "manifest": {
+          "manifest_id": "agm_faf9f15968c08c3cbc3be494631cf035b89d3da74d8c63ea584af11897ee1844",
+          "root_artifact_id": "art_b8f642f97f43f393db96b841de85fd769dd4a01c319ae17e17bb13e85cb2dbce",
+          "root_sha256": "d8bfda7a571fc838280276bbce8981a23b59a2f3649e3942c487282513018b97",
+          "root_format": "apk",
+          "graph_sha256": "147678183583009b6528ca37bde3b0fa0fc3537ff2f3be8d14160ac6b0f3804e",
+          "node_count": 7,
+          "occurrence_count": 7,
+          "edge_count": 6
+        },
+        "available_counts": {
+          "nodes": 7,
+          "occurrences": 7,
+          "edges": 6,
+          "integrity_contradictions": 0
+        },
+        "observed_entry_kind_counts": {
+          "file": 7,
+          "directory": 0,
+          "symlink": 0,
+          "slice": 0
+        },
+        "source_complete": true,
+        "inventory_evidence_ids": [
+          "ev_56c4dd3176a1d9a4381779d4ddfbec9663b991473b9a38f3b5066bb83ab6e28e"
+        ],
+        "inspection": {
+          "coverage": {
+            "status": "complete-within-substeps",
+            "substeps_completed": 1,
+            "observations_retained": 1,
+            "observations_omitted": 0,
+            "hypotheses_retained": 0,
+            "hypotheses_omitted": 0,
+            "unexplored_branches_retained": 0,
+            "unexplored_branches_omitted": 0,
+            "next_probes_retained": 0,
+            "next_probes_omitted": 0
+          },
+          "unexplored_branches": []
+        },
+        "limitation_count": 2
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+      "ZIP inventory lists central-directory entries only. Non-entry bytes, including leading bytes before the first entry such as a self-extractor stub, an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+    ],
+    "relationship_coverage": null,
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk"
+      }
+    ],
+    "evidence_links": [
+      "ev_a7799072fbd1e53ac1667588450b583f9078f09866ae67d3b8e01ab9ad9e4175"
+    ],
+    "caller_input_path": "/home/user/Blue-bird/apks/BlueBird-AdFree.apk"
+  },
+  "evidence_bundle": {
+    "path": "/home/user/Blue-bird/reverse-engineering/rea/adfree-artifact.evidence.json",
+    "bytes": 22104
+  }
+}

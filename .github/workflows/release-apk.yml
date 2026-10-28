@@ -1,0 +1,134 @@
+name: release-signed-apk
+
+# Release signing. The keystore is NEVER in git -- it is supplied through four
+# repository secrets. When those secrets are absent the job runs in smoke mode:
+# it builds and verifies with an ephemeral key but publishes nothing.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+    branches: ["**"]
+    paths:
+      - .github/workflows/release-apk.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bluebird-release-apk
+  cancel-in-progress: false
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine signing mode
+        id: mode
+        env:
+          REL_KS_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          REL_KS_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          REL_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          REL_KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -n "$REL_KS_B64" ] && [ -n "$REL_KS_PASS" ] && [ -n "$REL_ALIAS" ] && [ -n "$REL_KEY_PASS" ]; then
+            echo "mode=release" >> "$GITHUB_OUTPUT"
+            echo "Release signing configured."
+          else
+            echo "mode=smoke" >> "$GITHUB_OUTPUT"
+            echo "::warning::Signing secrets are not configured. Running a verification-only build with an ephemeral key; no APK will be published. See android-app/SIGNING.md."
+          fi
+
+      - name: Build and sign the ad-free APK
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+          VARIANTS: adfree
+          OUT_DIR: ${{ runner.temp }}/release-out
+          REL_KS_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          REL_KS_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          REL_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          REL_KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x android-app/build.sh android-app/generate.py
+          if [ "$MODE" = "release" ]; then
+            printf '%s' "$REL_KS_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            test -s "$RUNNER_TEMP/release.jks"
+            chmod 600 "$RUNNER_TEMP/release.jks"
+            export KEYSTORE="$RUNNER_TEMP/release.jks"
+            export KEYSTORE_PASSWORD="$REL_KS_PASS" \
+                   KEY_ALIAS="$REL_ALIAS" \
+                   KEY_PASSWORD="$REL_KEY_PASS"
+          else
+            keytool -genkeypair -keystore "$RUNNER_TEMP/smoke.jks" -storetype JKS \
+              -storepass smoke123 -keypass smoke123 -alias smoke \
+              -keyalg RSA -keysize 2048 -validity 1 -dname "CN=Smoke Test" 2>/dev/null
+            export KEYSTORE="$RUNNER_TEMP/smoke.jks" \
+                   KEYSTORE_PASSWORD=smoke123 KEY_ALIAS=smoke KEY_PASSWORD=smoke123
+          fi
+          ./android-app/build.sh 2>&1 | tee apks/release-build.log
+
+      - name: Verify APK signature schemes
+        env:
+          MODE: ${{ steps.mode.outputs.mode }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          BT="$(ls "$SDK/build-tools" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)"
+          APKSIGNER="$SDK/build-tools/$BT/apksigner"
+          APK="$RUNNER_TEMP/release-out/BlueBird-AdFree.apk"
+          "$APKSIGNER" verify --verbose --print-certs "$APK" 2>&1 | tee apks/release-verify.log
+          grep -q "Verified using v2 scheme (APK Signature Scheme v2): true" apks/release-verify.log
+          grep -q "Verified using v3 scheme (APK Signature Scheme v3): true" apks/release-verify.log
+          echo "v2 and v3 signatures verified."
+
+      - name: Publish release-signed APK
+        if: steps.mode.outputs.mode == 'release'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp "$RUNNER_TEMP/release-out/BlueBird-AdFree.apk" apks/BlueBird-AdFree.apk
+          (cd apks && sha256sum *.apk > SHA256SUMS)
+          CERT="$(awk -F': ' '/Signer #1 certificate SHA-256 digest/{print $2; exit}' apks/release-verify.log)"
+          SHA="$(awk '/BlueBird-AdFree.apk/ {print $1; exit}' apks/SHA256SUMS)"
+          {
+            echo "# Release signing"
+            echo
+            echo "This APK was signed with the persistent keystore held in the repository"
+            echo "secrets \`ANDROID_KEYSTORE_BASE64\`, \`ANDROID_KEYSTORE_PASSWORD\`,"
+            echo "\`ANDROID_KEY_ALIAS\` and \`ANDROID_KEY_PASSWORD\`."
+            echo
+            echo "- Signing certificate SHA-256: \`$CERT\`"
+            echo "- APK SHA-256: \`$SHA\`"
+            echo "- Built by workflow run: \`$GITHUB_RUN_ID\` from commit \`$GITHUB_SHA\`"
+            echo
+            echo "Keep that keystore backed up. Android will refuse an update signed by a"
+            echo "different key. See [android-app/SIGNING.md](../android-app/SIGNING.md)."
+          } > apks/SIGNING-INFO.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apks/BlueBird-AdFree.apk apks/SHA256SUMS apks/SIGNING-INFO.md \
+                  apks/release-build.log apks/release-verify.log
+          git commit -m "Release: sign BlueBird AdFree with repository key [skip ci]" || echo "nothing to commit"
+          git push origin "HEAD:arena/87afce57-blue-bird"
+
+      - name: Keep verification logs
+        if: steps.mode.outputs.mode == 'smoke'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-signing-smoke-logs
+          path: |
+            apks/release-build.log
+            apks/release-verify.log
+          retention-days: 7
+
+      - name: Smoke-mode result
+        if: steps.mode.outputs.mode == 'smoke'
+        run: |
+          echo "Pipeline verified with an ephemeral key. No APK was published."
+          echo "Set the four signing secrets, then re-run this workflow (Actions -> Run workflow,"
+          echo "or push a v* tag) to publish an APK signed with your persistent key."
