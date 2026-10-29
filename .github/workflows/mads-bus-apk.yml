@@ -41,8 +41,23 @@ jobs:
         run: |
           set -euo pipefail
           export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          sdkmanager --licenses >/dev/null < <(yes)
-          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          if [[ -f "$ANDROID_HOME/platforms/android-36/android.jar" && -x "$ANDROID_HOME/build-tools/36.0.0/aapt2" ]]; then
+            echo "Android SDK 36 is already installed."
+            exit 0
+          fi
+          sdk_manager="$(command -v sdkmanager || true)"
+          if [[ -z "$sdk_manager" ]]; then
+            sdk_manager="$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager 2>/dev/null | sort -V | tail -1 || true)"
+          fi
+          if [[ -z "$sdk_manager" ]]; then
+            echo "::error::Unable to locate sdkmanager under $ANDROID_HOME"
+            find "$ANDROID_HOME" -maxdepth 4 -type f -name sdkmanager 2>/dev/null || true
+            exit 1
+          fi
+          echo "Using $sdk_manager"
+          "$sdk_manager" --licenses >/dev/null < <(yes)
+          "$sdk_manager" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
 
       - name: Build web bundle and sync Capacitor Android
         working-directory: Mads_experiments/mads-bus
@@ -63,7 +78,9 @@ jobs:
           apk="artifacts/MadsBus-debug.apk"
           cp android/app/build/outputs/apk/debug/app-debug.apk "$apk"
           test -s "$apk"
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs "$apk" | tee artifacts/signature.txt
+          apk_signer="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner -perm -u+x | sort -V | tail -1)"
+          test -x "$apk_signer"
+          "$apk_signer" verify --verbose --print-certs "$apk" | tee artifacts/signature.txt
           sha256sum "$apk" | tee artifacts/MadsBus-debug.apk.sha256
 
       - name: Upload installable APK and verification details
