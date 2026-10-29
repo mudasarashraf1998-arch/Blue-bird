@@ -1,0 +1,114 @@
+name: Mads Bus APK
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - .github/workflows/mads-bus-apk.yml
+      - Mads_experiments/mads-bus/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mads-bus-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-apk:
+    name: Test, build, and verify Android APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Mads_experiments/mads-bus/package-lock.json
+
+      - name: Install locked web and Android dependencies
+        working-directory: Mads_experiments/mads-bus
+        run: npm ci --no-audit --no-fund
+
+      - name: Run physics and wallet regression tests
+        working-directory: Mads_experiments/mads-bus
+        run: npm test
+
+      - name: Install Android SDK 36
+        shell: bash
+        run: |
+          set -euo pipefail
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          if [[ -f "$ANDROID_HOME/platforms/android-36/android.jar" && -x "$ANDROID_HOME/build-tools/36.0.0/aapt2" ]]; then
+            echo "Android SDK 36 is already installed."
+            exit 0
+          fi
+          sdk_manager="$(command -v sdkmanager || true)"
+          if [[ -z "$sdk_manager" ]]; then
+            sdk_manager="$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager 2>/dev/null | sort -V | tail -1 || true)"
+          fi
+          if [[ -z "$sdk_manager" ]]; then
+            echo "::error::Unable to locate sdkmanager under $ANDROID_HOME"
+            find "$ANDROID_HOME" -maxdepth 4 -type f -name sdkmanager 2>/dev/null || true
+            exit 1
+          fi
+          echo "Using $sdk_manager"
+          "$sdk_manager" --licenses >/dev/null < <(yes)
+          "$sdk_manager" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Build web bundle and sync Capacitor Android
+        working-directory: Mads_experiments/mads-bus
+        run: npm run android:sync
+
+      - name: Build, sign, and verify debug APK
+        working-directory: Mads_experiments/mads-bus
+        shell: bash
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="${JAVA_HOME_21_X64:?Java 21 is required on the runner}"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          java -version
+          chmod +x android/gradlew
+          (cd android && ./gradlew assembleDebug --stacktrace --no-daemon)
+          mkdir -p artifacts
+          apk="artifacts/MadsBus-debug.apk"
+          cp android/app/build/outputs/apk/debug/app-debug.apk "$apk"
+          test -s "$apk"
+          apk_signer="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner -perm -u+x | sort -V | tail -1)"
+          test -x "$apk_signer"
+          "$apk_signer" verify --verbose --print-certs "$apk" | tee artifacts/signature.txt
+          sha256sum "$apk" | tee artifacts/MadsBus-debug.apk.sha256
+
+      - name: Publish APK to the session branch
+        if: github.ref == 'refs/heads/arena/e12282ac-blue-bird'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p apks
+          cp Mads_experiments/mads-bus/artifacts/MadsBus-debug.apk apks/MadsBus-debug.apk
+          (cd apks && sha256sum MadsBus-debug.apk > MadsBus-debug.apk.sha256)
+          cp Mads_experiments/mads-bus/artifacts/signature.txt apks/MadsBus-debug-signature.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apks/MadsBus-debug.apk apks/MadsBus-debug.apk.sha256 apks/MadsBus-debug-signature.txt
+          if git diff --cached --quiet; then
+            echo "APK and verification details are unchanged."
+          else
+            git commit -m "build: publish Mads Bus debug APK [skip ci]"
+            git push origin "HEAD:arena/e12282ac-blue-bird"
+          fi
+
+      - name: Upload installable APK and verification details
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: MadsBus-debug
+          path: |
+            Mads_experiments/mads-bus/artifacts/MadsBus-debug.apk
+            Mads_experiments/mads-bus/artifacts/MadsBus-debug.apk.sha256
+            Mads_experiments/mads-bus/artifacts/signature.txt
+          if-no-files-found: error
+          retention-days: 14

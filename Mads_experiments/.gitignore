@@ -1,0 +1,11 @@
+# Independent reference clone; not part of the Blue-bird patch.
+/rea/
+
+# Authorized analysis inputs and generated evidence can be large.
+*.apk
+*.aab
+*.apks
+*.xapk
+*.obb
+/analysis/input/*.zip
+/analysis/evidence/

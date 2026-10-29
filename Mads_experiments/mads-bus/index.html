@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#07111f" />
+    <meta name="description" content="Mads Bus — an original offline 3D bus driving game." />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <title>Mads Bus</title>
+  </head>
+  <body>
+    <svg class="svg-defs" aria-hidden="true">
+      <defs>
+        <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v10M8.5 9.2c0-2.5 7-2.5 7 0 0 2.2-7 1.7-7 4.2 0 2.5 7 2.5 7 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+        <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h4l2-2h4l2 2h4v12H4z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+        <symbol id="i-door" viewBox="0 0 24 24"><path d="M5 21V3h14v18M5 21h14M9 3v18M14 12h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+        <symbol id="i-horn" viewBox="0 0 24 24"><path d="M4 10v4h4l7 4V6l-7 4zm11-1c2 2 2 4 0 6m3-9c4 4 4 8 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+        <symbol id="i-light" viewBox="0 0 24 24"><path d="M14 5c-5 0-9 3-9 7s4 7 9 7c3 0 5-3 5-7s-2-7-5-7zm5 2 3-2m-3 7h4m-4 5 3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h3v14H7zm7 0h3v14h-3z" fill="currentColor"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z" fill="currentColor"/></symbol>
+        <symbol id="i-reset" viewBox="0 0 24 24"><path d="M5 8V3m0 0h5M5 3l3 3a7 7 0 1 1-2 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+        <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 10v4h4l6 4V6l-6 4zm12-1c2 2 2 4 0 6m3-9c4 4 4 8 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      </defs>
+    </svg>
+
+    <main id="app">
+      <div id="scene" aria-label="3D bus driving view"></div>
+      <div class="menu-backdrop"></div>
+
+      <section id="menu-screen" class="screen menu-screen">
+        <header class="brand-block">
+          <div class="brand-kicker"><span class="status-dot"></span> Offline driving experience</div>
+          <h1>MADS <span>BUS</span></h1>
+          <p>Take the wheel. Own the road.</p>
+        </header>
+
+        <div class="menu-panel glass-panel">
+          <div class="menu-wallet">
+            <span>Driver balance</span>
+            <strong class="balance-value">Rp 0</strong>
+          </div>
+
+          <div class="section-heading">
+            <span>01</span><div><h2>Choose your route</h2><p>Every stop earns driving income.</p></div>
+          </div>
+          <div id="route-list" class="route-list"></div>
+
+          <div class="section-heading livery-heading">
+            <span>02</span><div><h2>Pick a livery</h2><p>Original colors, no downloads needed.</p></div>
+          </div>
+          <div id="livery-list" class="livery-list" aria-label="Bus livery choices"></div>
+
+          <button id="start-button" class="primary-button">
+            <svg><use href="#i-play"></use></svg>
+            Start engine
+          </button>
+          <div class="menu-footer">
+            <span>Keyboard: WASD / arrows · Space brake</span>
+            <button id="menu-sound" class="text-button" aria-label="Toggle sound">Sound on</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="hud" class="hud hidden" aria-label="Driving controls">
+        <div class="top-bar">
+          <div class="hud-chip wallet-chip">
+            <svg><use href="#i-coin"></use></svg>
+            <div><small>Balance</small><strong class="balance-value">Rp 0</strong></div>
+          </div>
+          <div class="route-progress hud-chip">
+            <small id="route-label">CITY LOOP · STOP 1/5</small>
+            <strong id="next-stop">Central Terminal</strong>
+            <span id="stop-distance">0 m</span>
+          </div>
+          <div class="top-actions">
+            <button id="camera-button" class="icon-button" aria-label="Change camera"><svg><use href="#i-camera"></use></svg></button>
+            <button id="pause-button" class="icon-button" aria-label="Pause game"><svg><use href="#i-pause"></use></svg></button>
+          </div>
+        </div>
+
+        <button id="money-button" class="money-button" aria-label="Add 10000 instant game credits">
+          <span class="money-icon"><svg><use href="#i-coin"></use></svg><b>+</b></span>
+          <span><small>Instant credit</small><strong>+Rp 10K</strong></span>
+        </button>
+
+        <div id="drive-prompt" class="drive-prompt hidden">Open the doors to board passengers</div>
+
+        <div class="utility-controls">
+          <button id="doors-button" class="utility-button" aria-label="Open or close doors"><svg><use href="#i-door"></use></svg><span>Doors</span></button>
+          <button id="horn-button" class="utility-button" data-hold="horn" aria-label="Hold to honk"><svg><use href="#i-horn"></use></svg><span>Horn</span></button>
+          <button id="lights-button" class="utility-button" aria-label="Toggle headlights"><svg><use href="#i-light"></use></svg><span>Lights</span></button>
+        </div>
+
+        <div class="steering-controls" aria-label="Steering controls">
+          <button class="steer-button" data-hold="left" aria-label="Steer left">‹</button>
+          <div class="steering-wheel"><span></span><span></span><span></span><b></b></div>
+          <button class="steer-button" data-hold="right" aria-label="Steer right">›</button>
+        </div>
+
+        <div class="speed-cluster">
+          <div class="gear" id="gear">D</div>
+          <strong id="speed-value">0</strong>
+          <span>km/h</span>
+          <div class="speed-track"><i id="speed-fill"></i></div>
+        </div>
+
+        <div class="pedal-controls">
+          <button class="pedal brake-pedal" data-hold="brake" aria-label="Brake or reverse"><span>Brake</span><small>hold for reverse</small></button>
+          <button class="pedal throttle-pedal" data-hold="throttle" aria-label="Accelerate"><span>Drive</span><small>throttle</small></button>
+        </div>
+
+        <canvas id="minimap" width="180" height="180" aria-label="Route minimap"></canvas>
+        <div id="surface-warning" class="surface-warning hidden">OFF ROAD · reduced grip</div>
+      </section>
+
+      <section id="pause-screen" class="screen pause-screen hidden">
+        <div class="pause-panel glass-panel">
+          <span class="brand-kicker">Engine idling</span>
+          <h2>Drive paused</h2>
+          <p>Your route and balance are saved locally.</p>
+          <button id="resume-button" class="primary-button"><svg><use href="#i-play"></use></svg>Resume</button>
+          <button id="reset-button" class="secondary-button"><svg><use href="#i-reset"></use></svg>Restart route</button>
+          <button id="exit-button" class="text-button">Back to garage</button>
+        </div>
+      </section>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <div id="credit-particles" aria-hidden="true"></div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
