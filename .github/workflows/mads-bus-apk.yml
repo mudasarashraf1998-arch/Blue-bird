@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: mads-bus-apk-${{ github.ref }}
@@ -82,6 +82,25 @@ jobs:
           test -x "$apk_signer"
           "$apk_signer" verify --verbose --print-certs "$apk" | tee artifacts/signature.txt
           sha256sum "$apk" | tee artifacts/MadsBus-debug.apk.sha256
+
+      - name: Publish APK to the session branch
+        if: github.ref == 'refs/heads/arena/e12282ac-blue-bird'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p apks
+          cp Mads_experiments/mads-bus/artifacts/MadsBus-debug.apk apks/MadsBus-debug.apk
+          (cd apks && sha256sum MadsBus-debug.apk > MadsBus-debug.apk.sha256)
+          cp Mads_experiments/mads-bus/artifacts/signature.txt apks/MadsBus-debug-signature.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apks/MadsBus-debug.apk apks/MadsBus-debug.apk.sha256 apks/MadsBus-debug-signature.txt
+          if git diff --cached --quiet; then
+            echo "APK and verification details are unchanged."
+          else
+            git commit -m "build: publish Mads Bus debug APK [skip ci]"
+            git push origin "HEAD:arena/e12282ac-blue-bird"
+          fi
 
       - name: Upload installable APK and verification details
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
